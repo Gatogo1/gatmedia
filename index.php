@@ -278,7 +278,7 @@ else {
                 
 
                <div id="post" class=" post col-lg-3 ">
-                    <div class=" pb-2 ml-2 rounded text-center single-post-wrap style-white">
+                    <div class=" pb-2 m-1 rounded text-center single-post-wrap style-white">
                     <div class="details">
                            
                             <div class="post-meta-single mt-3"> 
