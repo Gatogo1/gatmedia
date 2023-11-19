@@ -293,9 +293,9 @@ else {
                            
                             <ul class=" social-area-2">
                               
-                                <li><a class="facebook-icon" href="https://www.facebook.com/sharer.php?u=https://Gatmediagh.com/blog_details.php?id=<?php  echo $slug?>"><img src="assets/img/add/fb.png" alt="" width="40" class="rounded-circle" /></a></li>
+                                <li><a class="facebook-icon" href="https://www.facebook.com/sharer.php?u=https://Gatmediagh.com/blog_details.php?id=<?php  echo $slug?>"><img src="assets/img/add/fb.png" alt="" width="25" class="rounded-circle" /></a></li>
                                
-                                <li><a class="" href="whatsapp://send?text=https://Gatmediagh.com/blog_details.php?id=<?php  echo $slug?>"><img src="assets/img/add/wa1.png" alt="" width="40" class="rounded-circle" /></i></a></li>
+                                <li><a class="" href="whatsapp://send?text=https://Gatmediagh.com/blog_details.php?id=<?php  echo $slug?>"><img src="assets/img/add/wa1.png" alt="" width="25" class="rounded-circle" /></i></a></li>
                                
                             </ul>
                         </div>
@@ -331,13 +331,13 @@ else {
                             <div class="post-meta-single">
                             <iframe name="votar" style="display:none;"></iframe>   
                     <form action="comm/love_submi.php"  method="POST" target="votar">
-                    <ul>
+                    <ul >
                         <input type="hidden" name="userID" value="<?php echo $useridCODE ?>">
                         <input type="hidden" name="postID" value="<?php echo $code ?>">
-                                <li  class=" com "><samp class="p-1"><button   type="submit" name="submit" class="text-white btn btn-outline  btn-sm"  data-toggle="modal" data-target="#exampleModal"><i style="color:<?php echo $like_color ?> "  class="fa  fa-heart" aria-hidden="true"></i> Love <?php echo $total_like?></button></samp></li>
+                                <li  class=" com "><samp class="p-1"><button   type="submit" name="submit" class="text-white btn btn-outline  btn-sm"  data-toggle="modal" data-target="#exampleModal"><i style="color:<?php echo $like_color ?> "  class="fa  fa-heart" aria-hidden="true"></i><span  id="refresh"  > Love 0 </span></button></samp></li>
                                 <li class=" com  rounded"><samp class="p-1"><a  href="<?=$links;?>"  class=" btn btn-outline  btn-sm text-white" onclick="demoDisplay()" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-comment" aria-hidden="true"></i> Comment <?php echo $total_comment?></a></samp></li>
-                  
-                
+                 
+
               </ul>
                      </form>
                               
@@ -348,7 +348,7 @@ else {
                     
                 </div>
              
-            
+                
                 <?php } ?>
                 
             </div>
@@ -407,8 +407,15 @@ else {
    
     <!---- comment----->
     <!-- Button trigger modal -->
+ 
 
     <script type="text/javascript">
+
+setInterval(function() {
+    $("#refresh").load( "#refresh");
+}, 10000); // seconds to wait, miliseconds
+
+
       function tabl(){
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function(){

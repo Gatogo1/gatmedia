@@ -118,12 +118,12 @@ $result=mysqli_query($conn,$sql);
 
 <style>
     body{
-    background-color: rgb(10, 143, 161);
+    background-color:  #121A2F;
     font-family: 'ABeeZee';font-size: 22px;
 }
 
 .form{
- 
+  background-color:  #283f62;
   padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
@@ -141,9 +141,9 @@ $result=mysqli_query($conn,$sql);
 <center>
 
        
-<form action="" method="POST" class="form badge-info  m-3  p-3">
+<form action="" method="POST" class="form badge-info rounded m-3  p-3">
    <div class="logo">
-       <img style="width: 200px; ;" src="image/log2.jpg" alt="">
+       <img style="width: 200px; " src="image/log2.jpg" alt="">
    </div>
    <h4>User Login</h4>
    <div class="  form-group">
@@ -165,11 +165,11 @@ $result=mysqli_query($conn,$sql);
   
 
 <!-- Sign in button -->
-<button class="btn btn-success  w-25 btn-block" type="submit">Login</button>
-<a href="register" class="btn btn-secondary  w-25 btn-block" type="submit">Sign-up</a>
+<button class="btn btn-success  w-50 btn-block" type="submit">Login</button>
+<a href="register" class="btn btn-secondary text-center w-50 btn-block" type="submit">Register</a>
 <p style="font-size:20px;">Or Login with</p>
 
-<a href="" class="btn btn-primary  w-25 btn-block" type="submit"><i class="fa fa-facebook"></i> facebook</a>
+<a href="" class="btn btn-primary  w-50 btn-block" type="submit"><i class="fa fa-facebook"></i></a>
 </form>
 
 </center>
