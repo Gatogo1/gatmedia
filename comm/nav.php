@@ -175,10 +175,10 @@ $_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
 
         <div class="  scrollmenu text-center">
   <a class="nav rounded" title="Home" href="home"  onclick="demoDisplay()"  ><i class="fa fa-home" aria-hidden="true"></i></a>
-  <a class="nav rounded"title="Profile" href="profile" onclick="demoDisplay()"  ><i class="fa fa-user" aria-hidden="true"></i></a>  
+  <a class="nav rounded"title="Profile" href="profile.php" onclick="demoDisplay()"  ><i class="fa fa-user" aria-hidden="true"></i></a>  
   <a class="nav " title="Category" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
 
-  <a  onload = "table();" class="nav" title="Notification" href="#" onclick="demoDisplay()"   ><i class="fa fa-bell" aria-hidden="true"></i><span    id="table" class="bg-danger rounded p-1"></span></a>
+  <a  onload = "table();" class="nav" title="Notification" href="#about_us" onclick="demoDisplay()"   ><i class="fa fa-bell" aria-hidden="true"></i><span    id="table" class="bg-danger rounded p-1"></span></a>
   <a  onload = "tables();" class="nav" title="Massage" href="#" onclick="demoDisplay()"  ><i  class="fa fa-envelope-o" aria-hidden="true"></i> <span  id="tables" class="bg-danger rounded p-1"></span></a>
   <a  class="nav" title="Work"href="#work" onclick="demoDisplay()"  ><i class="fa fa-briefcase" aria-hidden="true"></i></a>
   <a  class="nav" title="<?php echo $log_status ?> "href="<?php echo $log_status ?>" onclick="demoDisplay()"  ><?php echo $login_status ?></a>
@@ -220,5 +220,5 @@ $_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
       </div>
     </div>
   </div>
-  
+ 
 </div>

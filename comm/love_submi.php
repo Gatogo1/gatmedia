@@ -16,16 +16,17 @@ include('conn.php');
                     $user_like = mysqli_num_rows($result7) ;
                  if(mysqli_num_rows($result7)>=1)
                    {
-                    $like_color='red';
+                    echo 'submitedd';
+                
                    }   
                 else{
                 
                 
                     $sql8 = "INSERT INTO `love`( `userID`, `postID`) VALUES ('$userid','$postid')";
+                   
                     if(mysqli_query($conn,$sql8)){
-                        echo"<script>alert('like submited ; window.location='home'</script>";
-                
-                    }
+                        header("location:../home#233");
+                          }
                     else{
                         echo 'Error: '.mysqli_error($conn);
                       

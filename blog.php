@@ -1,13 +1,3 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script type='text/javascript'>
-setInterval(function() {
-    $("#refresh").load( "#refresh");
-}, 10000); // seconds to wait, miliseconds
-</script>
+$rn = 0;while ($row = ...................) {    $rn++;    echo "    <tr>        <td>".$row['abc']."</td>        <td><a id='delete".$rn."' href='delete.php?m=$m&abc=$row[abc]'>DELETE</a></td>        <script>        $(document).ready(function(e) {            $('#delete".$rn."').click(function(e) {		var conf = confirm('Sure Delete!?')		if (!conf) {		    event.preventDefault();		}            });        });        </script>    </tr>    ";}
 
-<div id="refresh" class="post">
-                        <h1><?php echo 0; ?></h1>
-                       /p>
-                       
-                    </div>
+while ($row = ...................) {    echo "    <tr>        <td>".$row['abc']."</td>        <td><a id='delete' href='delete.php?m=$m&abc=$row[abc]'>DELETE</a></td>        <script>        $(document).ready(function(e) {            $('#delete').click(function(e) {		var conf = confirm('Sure Delete!?')		if (!conf) {		    event.preventDefault();		}            });        });        </script>    </tr>    ";}

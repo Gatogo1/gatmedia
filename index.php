@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!--head section-->
 <?php include('comm/head.php')?>
 <!--end head section-->
@@ -329,13 +329,13 @@ else {
                           
                             <hr class="bg-success">
                             <div class="post-meta-single">
-                            <iframe name="votar" style="display:none;"></iframe>   
-                    <form action="comm/love_submi.php"  method="POST" target="votar">
+                            <iframe name="votar" style="display:none;"></iframe>  
+                    <form action="comm/love_submi.php"  method="POST"  >
                     <ul >
                         <input type="hidden" name="userID" value="<?php echo $useridCODE ?>">
                         <input type="hidden" name="postID" value="<?php echo $code ?>">
-                                <li  class=" com "><samp class="p-1"><button   type="submit" name="submit" class="text-white btn btn-outline  btn-sm"  data-toggle="modal" data-target="#exampleModal"><i style="color:<?php echo $like_color ?> "  class="fa  fa-heart" aria-hidden="true"></i><span  id="refresh"  > Love 0 </span></button></samp></li>
-                                <li class=" com  rounded"><samp class="p-1"><a  href="<?=$links;?>"  class=" btn btn-outline  btn-sm text-white" onclick="demoDisplay()" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-comment" aria-hidden="true"></i> Comment <?php echo $total_comment?></a></samp></li>
+                                <li id="<?php echo $data ?>" class=" com "><samp class="p-1"><button   type="submit" name="submit" class="text-white btn btn-outline  btn-sm"  data-toggle="modal" data-target="#exampleModal"><i style="color:<?php echo $like_color ?> "  class="fa  fa-heart" aria-hidden="true"></i><span  id="refresh"  > <?php echo $total_like ?> Love  </span></button></samp></li>
+                                <li class=" com  rounded"><samp class="p-1"><a  href="<?=$links;?>"  class=" btn btn-outline  btn-sm text-white" onclick="demoDisplay()" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-comment" aria-hidden="true"></i> Comment <?php echo $data ?></a></samp></li>
                  
 
               </ul>
