@@ -35,12 +35,6 @@ $url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
            $tittle=$row['tittle'];
       $image=$row['image'];
       $content=$row['content'];
-      $category=$row['category'];
-          $dis=$row['dis'];
-         $byF=$row['fname'];
-           $byS=$row['sname'];
-           $img=$row['img'];
-           $dis=$row['dis'];
           $cover=$row['cover_image'];
           $upload='upload';
               $file_t1 = substr(strrchr($image ,'.'),1);
@@ -57,13 +51,13 @@ $url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     <meta property="og:image" content="https://gatmediagh.com/adm/upload/<?php echo $image?>" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="googlebot" content="notranslate">
-    <meta name="description" content="<?php echo $dis ?>">
+    <meta name="description" content="<?php echo $tittle ?>">
     <meta name="google-adsense-account" content="ca-pub-2553699547868173">
     <title><?php echo $tittle ?></title>
   
 <meta property="og:type"               content="article" />
 <meta property="og:title"              content="<?php echo $tittle?>" />
-<meta property="og:description"        content="<?php echo $dis ?>" />
+<meta property="og:description"        content="<?php echo $tittle ?>" />
 <meta property="og:image" content="https://gatmediagh.com/adm/<?php echo $upload?>/<?php echo $image?>" />
 
 
@@ -349,7 +343,7 @@ $page_view = mysqli_num_rows($result2) ;
 
                             <ul>
                            
-                               <li ><img src="adm/user_pic/<?php echo $imag?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $byF ?>  <?php echo $byS ?>
+                               <li ><img src="adm/user_pic/<?php echo $imag?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $row1['fname'] ?> <?php echo $row1['sname'] ?>
                                <i class="fa fa-clock-o "></i><?php echo $date?>  <i style="color:<?php echo $view_color ?>" class="fa pl-2 fa-eye" aria-hidden="true"></i><?php echo $user_like ?>
                             </span> 
                                 <div class="topbar-social">
@@ -385,9 +379,9 @@ $page_view = mysqli_num_rows($result2) ;
             <article class="  ">
               
                 <div class="post-content">
-                    <img style="display:<?php echo $imgs ?>;"  src="adm/upload/<?php echo $image?>" alt="<?php echo $tittle?>" style="width:100%;">
+                    <img style="display:<?php echo $imgs ?>;"  src="formValidation/upload/<?php echo $image?>" alt="<?php echo $tittle?>" style="width:100%;">
                     <video style="display:<?php echo $vi ?>;"  width="100%"    controls controlsList="nodownload" loop  playsinline >
-                               <source src="adm/upload/<?php echo $image;?>" type="video/mp4">
+                               <source src="formValidation/upload/<?php echo $image;?>" type="video/mp4">
 
                              </video>
                    <!-- <ul class="post-meta list-inline">
@@ -466,11 +460,7 @@ $page_view = mysqli_num_rows($result2) ;
            $tittle=$row['tittle'];
            $image=$row['image'];
            $content=$row['content'];
-           $category=$row['category'];
-          $byf=$row['fname'];
-           $bys=$row['sname'];
-           $img=$row['img'];
-           $dis=$row['dis'];
+          $creator=$row['id'];
        $slug=$row['slug'];
        $code=$data*1540948579;
   $links="blog_details.php?id=$slug";           $sql2 = "select * from pagehits where postID='$data' ";
@@ -478,7 +468,13 @@ $page_view = mysqli_num_rows($result2) ;
            $page_view = mysqli_num_rows($result2) ;
            
            $page_v=round($page_view/6);
-                      
+                   
+           
+
+
+           $sql1="select * from users where id='$creator' ";
+           $result1 = mysqli_query($conn,$sql1)or die( mysqli_error($conn));
+           $row1=mysqli_fetch_array($result1) ;   
 //code for comment total number
 $sql3 = "select * from comments where postID='$data' ";
 $result3 = mysqli_query($conn,$sql3)or die( mysqli_error($conn));
@@ -507,7 +503,7 @@ $total_comment = mysqli_num_rows($result3) ;
 
                           
                             <ul>
-                                 <li><img src="adm/user_pic/<?php echo $imag?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $byF ?>  </span> 
+                                 <li><img src="adm/user_pic/<?php echo $row['image']?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $row1['fname'] ?> <?php echo $row1['sname'] ?> </span> 
 
                            
                                 <div class="topbar-social">
@@ -539,7 +535,7 @@ $total_comment = mysqli_num_rows($result3) ;
                         <div class="thumb">
                             <a onclick="demoDisplay()"  href="<?=$links; ?>"><img style="display:<?php echo $imgs ?>;" src="adm/upload/<?php echo $image?>" alt="img"></a>
                             <video style="display:<?php echo $vi ?>;"  width="100%"  controls controlsList="nodownload" loop  playsinline >
-                               <source src="adm/upload/<?php echo  $row['image'];?>" type="video/mp4">
+                               <source src="formValidation/upload/<?php echo  $row['image'];?>" type="video/mp4">
 
                              </video>
                             <a href="<?=$links;?>" class="tag-base tag-blue"><?php echo $category?></a>

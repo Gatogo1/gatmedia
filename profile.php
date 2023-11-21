@@ -1,202 +1,213 @@
+
 <?php session_start(); ?>
-<!--head section-->
-<?php include('comm/head.php')?>
-<!--end head section-->
-<style>
-a:hover {
-  text-decoration: none;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php include('comm/head.php')?>
+  <style>
+.profile-head {
+    transform: translateY(5rem)
 }
-a{
 
-    color: #22166a;
+.cover {
+    background-image: url(https://images.unsplash.com/photo-1530305408560-82d13781b33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+    background-size: cover;
+    background-repeat: no-repeat
 }
 
+body {
     
-    .img-sm {
-    width: 46px;
-    height: 46px;
-}
-
-.panel {
-    box-shadow: 0 2px 0 rgba(0,0,0,0.075);
-    border-radius: 0;
-    border: 0;
-    margin-bottom: 15px;
-}
-
-.panel .panel-footer, .panel>:last-child {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.panel .panel-heading, .panel>:first-child {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-
-.panel-body {
-    padding: 25px 20px;
-}
-
-
-.media-block .media-left {
-    display: block;
-    float: left
-}
-
-.media-block .media-right {
-    float: right
-}
-
-.media-block .media-body {
-    display: block;
-    overflow: hidden;
-    width: auto
-}
-
-.middle .media-left,
-.middle .media-right,
-.middle .media-body {
-    vertical-align: middle
-}
-
-.thumbnail {
-    border-radius: 0;
-    border-color: #e9e9e9
-}
-
-.tag.tag-sm, .btn-group-sm>.tag {
-    padding: 5px 10px;
-}
-
-.tag:not(.label) {
-    background-color: #fff;
-    padding: 6px 12px;
-    border-radius: 2px;
-    border: 1px solid #cdd6e1;
-    font-size: 12px;
-    line-height: 1.42857;
-    vertical-align: middle;
-    -webkit-transition: all .15s;
-    transition: all .15s;
-}
-.text-muted, a.text-muted:hover, a.text-muted:focus {
-    color: #acacac;
-}
-.text-sm {
-    font-size: 0.9em;
-}
-.text-5x, .text-4x, .text-5x, .text-2x, .text-lg, .text-sm, .text-xs {
-    line-height: 1.25;
-}
-
-.btn-trans {
-    background-color: transparent;
-    border-color: transparent;
-    color: #929292;
-}
-
-.btn-icon {
-    padding-left: 9px;
-    padding-right: 9px;
-}
-
-.btn-sm, .btn-group-sm>.btn, .btn-icon.btn-sm {
-    padding: 5px 10px !important;
-}
-
-.mar-top {
-    margin-top: 15px;
 }
 .space{
     width: 300px;
-    height: 100px;
+    height: 30px;
  
 }
 
-.single-post-wrap{
-    
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
-.com{
 
-    font-weight: bold;
-}
-.btn{
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-   
-}
+  </style>
+  <title>User Profile</title>
+</head>
+<body>
+  
+</body>
+</html>
 
-.marginRow{
-     margin:0px !important; 
-     background:red;
-   }
-</style>
-<body >
 <?php 
-if (isset($_SESSION["email"])) {
-	$login_status='<i class="fa fa-sign-out" aria-hidden="true"></i>';
-   $log_status='logout'; 
+
+include('comm/conn.php');
+        if (isset($_SESSION["email"])) {
+	$image=$_SESSION["image"];
+    $uid=$_SESSION['id'];
+    $uid=$_SESSION['id'];
+   
+    $useridCODE=$uid*1540948579;      
 } else {
-$login_status='<i class="fa fa-sign-in" aria-hidden="true"></i> ';
-$log_status='login';
-}
+  header("location:index.php");
+$uid=0;
+}  
 
-$_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
-?>
-
-    <!-- header start -->
-    <?php include('comm/nav.php')?>
-    <!-- navbar end -->
         
-    <!-- banner area start -->
+        
 
 
-<?php
+               $one='1';
+                $sql="select * from users where id='$uid'";
+          $result = mysqli_query($conn,$sql)or die( mysqli_error($conn));
 
-
-
- $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "thekambh_gat-blog";
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+          while ($row=mysqli_fetch_array($result)) {
+         
+           
 
 
 
+           $data=$row['id'];
+         
+         
+           $image=$row['image'];
+          
+         
+           $byF=$row['fname'];
+           $byS=$row['sname'];
+          
+            $code=$data*1540948579;
+          }
+         
+           
+      
+ $sql1 = "select * from blog where id2='$data' ";
+ $result1 = mysqli_query($conn,$sql1)or die( mysqli_error($conn));
+ $total_post = mysqli_num_rows($result1) ;   
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-         include('cleanUrl.php');
+
+ $sql2 = "select * from pagehits where creatorID='$uid' ";
+$result2 = mysqli_query($conn,$sql2)or die( mysqli_error($conn));
+$page_view = mysqli_num_rows($result2) ;
+  
+  $page_v=round($page_view/6);
+           
 
 
-       
+  $total_earning=$page_v*0.01;         
+              
                    
                  ?>
 
-
-
-
+<?php include('comm/nav.php')?>
 <div class="space">
 
 
 </div>
-  <div class="banner-area     bg-black" id="banner">
+
+<div class="row  no-gutters">
+   <div class="col-md-8 mx-auto"> 
+    <!-- Profile widget -->
+     <div class="bg-white shadow rounded overflow-hidden">
+       <div class="px-4 pt-0 pb-4 cover">
+         <div class="media align-items-end profile-head">
+           <div class="profile mr-3"><img src="adm/user_pic/<?php echo $image?>"alt="..." width="130"   class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
+          </div> 
+          <div class="media-body mb-5 text-white"> <h4 class="mt-0 mb-0 text-white"><?php echo $byF ?> <?php echo $byS ?></h4>
+ <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i>New York</p> </div> 
+</div>
+ </div>
+ <div class="bg-light p-4 d-flex mt-4 justify-content-end text-center">
+   <ul class="list-inline mt-3"> 
+    <li class="list-inline-item"> 
+      <h5 class="font-weight-bold mb-0 d-block"><?php echo $total_post?></h5>
+      <small class="text-muted"> <i class="fa fa-image mr-1"></i>Post</small> </li> <li class="list-inline-item"> 
+  <h5 class="font-weight-bold mb-0 d-block">$<?php echo $total_earning ?></h5>
+  <small class="text-muted"> <i class="fa fa-money mr-1"></i>Total Earning</small> </li> <li class="list-inline-item">
+  
+
+<h5 class="font-weight-bold mb-0 d-block"><?php echo $page_v ?></h5>
+
+<small class="text-muted"> <i class="fa fa-eye mr-1"></i>Total post Views</small> </li> </ul> </div> <div class="px-4 py-3">
+  
+<!---create post section --->
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-sm m-3" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+Create new blog
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+<!----- create post ---->
+      <form action="formValidation/postValidation.php" method="post" name="sentMessage" enctype="multipart/form-data" id="contactForm">
+      <input type="hidden" class="form-control" id="title" value=" <?php echo date(" jS \ F Y")  ?>" name="date">
+      <input type="hidden" name="userID"  class="form-control" id="formGroupExampleInput2" value=" <?php echo $uid?>">
+  <div class="form-group">
+    <label for="formGroupExampleInput">Tittle</label>
+    <input type="text" class="form-control" name="tittle" id="formGroupExampleInput" placeholder=" Input blog tittle hear">
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Content</label>
+    <input type="text" name="content"  class="form-control" id="formGroupExampleInput2" placeholder=" Input blog content">
+  </div>
+
+  <div class="form-group ">
+      <label for="inputState">Category</label>
+      <select id="inputState" name="cat" class="form-control">
+        <option selected>Choose...</option>
+        <option value="education">Education</option>
+        <option value="news">News</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="art">Art</option>
+        <option value="fun">Fun</option>
+        <option value="lifestyle">Lifestyle</option>
+        <option value="stories">Stories</option>
+      </select>
+    </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Select file</label>
+    <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+    <div class="invalid-feedback">File can be Image or video</div>
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Paste media link if any </label>
+    <textarea class="form-control" name="link" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" name="submit" class="btn btn-primary">Submit post</button>
+      </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+<!----- end create post ---->
+
+<h5 class="mb-0">About</h5> <div class="p-4 rounded shadow-sm bg-light"> <p class="font-italic mb-0"></p> <p class="font-italic mb-0">Lives in New York</p> <p class="font-italic mb-0">Photographer</p> </div> </div> 
+
+
+   <h5 class="mb-0">Recent post</h5>
+   <a href="#" class="btn btn-link text-muted">Show all</a> 
+  
+
+   <div class="banner-area     bg-black" id="banner">
         <div class="">
             
              <hr>
             <div class="row  no-gutters">
-                
             <?php 
       if (isset($_SESSION["email"])) {
             $uid=$_SESSION['id'];
@@ -208,7 +219,7 @@ if (!$conn) {
 
                $one='1';
              
-               $sql="select * from blog where status='$one'  order by id desc LIMIT 50   ";
+               $sql="select * from blog where id2='$uid'  order by id desc LIMIT 50   ";
           $result = mysqli_query($conn,$sql)or die( mysqli_error($conn));
          
          
@@ -221,23 +232,19 @@ if (!$conn) {
 
 
            $data=$row['id'];
-           $creator=$row['id2'];
            $date=$row['date'];
            $tittle=$row['tittle'];
            $image=$row['image'];
            $content=$row['content'];
            $category=$row['category'];
+           $byF=$row['fname'];
+           $byS=$row['sname'];
            $img=$row['img'];
+           $dis=$row['dis'];
          $slug=$row['slug'];;
             $code=$data*1540948579;
             $new=$row['id'];
             $imag = str_replace(' ', '', $img);
-
-
-
-            $sql1="select * from users where id='$creator' ";
-            $result1 = mysqli_query($conn,$sql1)or die( mysqli_error($conn));
-            $row1=mysqli_fetch_array($result1) ;
            
   $links="blog_details.php?id=$slug";           $sql2 = "select * from pagehits where postID='$data' ";
            $result2 = mysqli_query($conn,$sql2)or die( mysqli_error($conn));
@@ -279,9 +286,9 @@ else {
          
            
                  ?>
-                
 
-               <div id="post" class=" post col-lg-3 ">
+
+<div id="post" class=" post col-lg-3 ">
                     <div class=" pb-2 m-1 rounded text-center single-post-wrap style-white">
                     <div class="details">
                            
@@ -290,7 +297,7 @@ else {
                        
 
                             <ul>
-                                 <li><img src="adm/user_pic/<?php echo $row1['image']?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $row1['fname'] ?> <?php echo $row1['sname'] ?> </span> 
+                                 <li><img src="adm/user_pic/<?php echo $imag?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $byF ?>  </span> 
 
                            
                                 <div class="topbar-social">
@@ -322,9 +329,9 @@ else {
                             <p class="title m-2"><a onclick="demoDisplay()"  href="<?=$links;?>" class="text-white"  ><?php echo $tittle?></a></p>
                         </div>
                         <div class="thumb">
-                            <a  onclick="demoDisplay()"  href="<?=$links;?>"  ><img style="display:<?php echo $imgs ?>;" src="formValidation/upload/<?php echo $image?>"  alt="img"></a>
+                            <a  onclick="demoDisplay()"  href="<?=$links;?>"  ><img style="display:<?php echo $imgs ?>;" src="adm/upload/<?php echo $image?>"  alt="img"></a>
                             <video style="display:<?php echo $vi ?>;"  width="100%"  controls controlsList="nodownload" loop   muted playsinline >
-                               <source src="formValidation/upload/<?php echo  $row['image'];?>" type="video/mp4">
+                               <source src="adm/upload/<?php echo  $row['image'];?>" type="video/mp4">
 
                              </video>
                             <a href="<?=$links;?>" class="tag-base tag-blue"><?php echo $category?></a>
@@ -358,7 +365,8 @@ else {
             </div>
         </div>  
     </div>
-    
+
+
     <?php
                 
                 //Code for submitting love
@@ -530,3 +538,4 @@ playPauseVideo();
     <script src="assets/js/main.js"></script>
 </body>
 </html>
+   

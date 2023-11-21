@@ -18,6 +18,7 @@ RewriteRule ^logout?$ adm/logout.php
 RewriteRule ^register?$ form.php
 
 
+
 RewriteRule ^([^\.]+)\.html /blog_details.php?ids=$1 [L]
 
 #RewriteEngine On
