@@ -208,7 +208,7 @@ if (!$conn) {
 
                $one='1';
              
-               $sql="select * from blog where status='$one'  order by id desc LIMIT 50   ";
+               $sql="select * from blog where status='$one'  order by id desc LIMIT 30   ";
           $result = mysqli_query($conn,$sql)or die( mysqli_error($conn));
          
          
@@ -339,7 +339,7 @@ else {
                         <input type="hidden" name="userID" value="<?php echo $useridCODE ?>">
                         <input type="hidden" name="postID" value="<?php echo $code ?>">
                                 <li id="<?php echo $data ?>" class=" com "><samp class="p-1"><button   type="submit" name="submit" class="text-white btn btn-outline  btn-sm"  data-toggle="modal" data-target="#exampleModal"><i style="color:<?php echo $like_color ?> "  class="fa  fa-heart" aria-hidden="true"></i><span  id="refresh"  > <?php echo $total_like ?> Love  </span></button></samp></li>
-                                <li class=" com  rounded"><samp class="p-1"><a  href="<?=$links;?>"  class=" btn btn-outline  btn-sm text-white" onclick="demoDisplay()" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-comment" aria-hidden="true"></i> Comment <?php echo $data ?></a></samp></li>
+                                <li class=" com  rounded"><samp class="p-1"><a  href="<?=$links;?>"  class=" btn btn-outline  btn-sm text-white" onclick="demoDisplay()" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-comment" aria-hidden="true"></i> Comment <?php echo $total_like ?></a></samp></li>
                  
 
               </ul>

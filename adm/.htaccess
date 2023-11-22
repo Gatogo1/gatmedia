@@ -16,7 +16,7 @@ RewriteRule ^profile?$ adm/user_blogs.php
 RewriteRule ^login?$ adm/login.php
 RewriteRule ^logout?$ adm/logout.php
 RewriteRule ^register?$ form.php
-
+RewriteRule ^post?$ post.php
 
 RewriteRule ^([^\.]+)\.html /blog_details.php?ids=$1 [L]
 

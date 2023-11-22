@@ -173,7 +173,7 @@ p{
 }
 .space{
     width: 300px;
-    height: 150px;
+    height: 250px;
  
 }
 
@@ -195,6 +195,87 @@ p{
      background:red;
    }
 
+
+
+
+
+/* The Modal (background) */
+.modals {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-contents {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#captions {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-contents, #captions {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.closes {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.closes:hover,
+.closes:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-contents {
+    width: 100%;
+  }
+}
 </style>
 <!--end head section-->
 <body>
@@ -249,18 +330,26 @@ $uid=0;
 
 
 
-           $data=$row['id'];
-           $date=$row['date'];
-           $creatorID=$row['id2'];
-           $tittle=$row['tittle'];
-           $image=$row['image'];
-           $video=$row['video'];
-           $content=$row['content'];
-           $category=$row['category'];
-           $byF=$row['fname'];
-           $byS=$row['sname'];
-           $img=$row['img'];
-           $dis=$row['dis'];
+
+            $data=$row['id'];
+            $creator=$row['id2'];
+            $date=$row['date'];
+            $tittle=$row['tittle'];
+            $image=$row['image'];
+            $content=$row['content'];
+            $category=$row['category'];
+            $img=$row['img'];
+          $slug=$row['slug'];;
+             $code=$data*1540948579;
+             $new=$row['id'];
+             $imag = str_replace(' ', '', $img);
+ 
+ 
+ 
+             $sql1="select * from users where id='$creator' ";
+             $result1 = mysqli_query($conn,$sql1)or die( mysqli_error($conn));
+             $row1=mysqli_fetch_array($result1) ;
+
          $slug=create_slug($tittle);
             $code=$data*1540948579;
           }
@@ -301,7 +390,7 @@ $page_view = mysqli_num_rows($result2) ;
           }  
 
  else{
-    $sql9 = "INSERT INTO `pagehits`( `postID`, `viewer`, `creatorID`) VALUES ('$data','$user_agent1','$creatorID')";
+    $sql9 = "INSERT INTO `pagehits`( `postID`, `viewer`, `creatorID`) VALUES ('$data','$user_agent1','$creator')";
     if(mysqli_query($conn,$sql9)){
        
     }
@@ -343,7 +432,7 @@ $page_view = mysqli_num_rows($result2) ;
 
                             <ul>
                            
-                               <li ><img src="adm/user_pic/<?php echo $imag?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $row1['fname'] ?> <?php echo $row1['sname'] ?>
+                               <li ><img src="adm/user_pic/<?php echo $row1['image']?>" alt="" width="35" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $row1['fname'] ?> <?php echo $row1['sname'] ?> <br>
                                <i class="fa fa-clock-o "></i><?php echo $date?>  <i style="color:<?php echo $view_color ?>" class="fa pl-2 fa-eye" aria-hidden="true"></i><?php echo $user_like ?>
                             </span> 
                                 <div class="topbar-social">
@@ -379,11 +468,21 @@ $page_view = mysqli_num_rows($result2) ;
             <article class="  ">
               
                 <div class="post-content">
-                    <img style="display:<?php echo $imgs ?>;"  src="formValidation/upload/<?php echo $image?>" alt="<?php echo $tittle?>" style="width:100%;">
+                    <img  style="width:70%;" id="myImg" style="display:<?php echo $imgs ?>;"  src="formValidation/upload/<?php echo $image?>" alt="<?php echo $tittle?>" style="width:100%;">
                     <video style="display:<?php echo $vi ?>;"  width="100%"    controls controlsList="nodownload" loop  playsinline >
                                <source src="formValidation/upload/<?php echo $image;?>" type="video/mp4">
 
                              </video>
+
+
+
+                             <div id="myModals" class="modals">
+  <span class="closes">&times;</span>
+  <img class="modal-contents" id="img01">
+  <div id="captions"></div>
+</div>
+
+
                    <!-- <ul class="post-meta list-inline">
                         <li class="list-inline-item">
                             <i class="fa fa-user-circle-o"></i> <a href=""><?php echo $by ?></a>
@@ -395,11 +494,8 @@ $page_view = mysqli_num_rows($result2) ;
                             <i class="fa fa-calendar-o"></i> <a href="#"><?php echo $date ?></a>
                         </li>
                     </ul>--->
-                    <p style="font-size:5vw;" class="font-weight-normal"> <?php echo $content ?> </p>
-                    <div class="video">
-                        <?php echo $video ?>
-                        
-                    </div>
+                    <p style="font-size:17px;" class="font-weight-normal"> <?php echo $content ?> </p>
+                    
                     <?php include('comm/social_share.php')?>
                     <hr class="mb40">
  
@@ -503,7 +599,7 @@ $total_comment = mysqli_num_rows($result3) ;
 
                           
                             <ul>
-                                 <li><img src="adm/user_pic/<?php echo $row['image']?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $row1['fname'] ?> <?php echo $row1['sname'] ?> </span> 
+                                 <li><img src="adm/user_pic/<?php echo $row1['image']?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $row1['fname'] ?> <?php echo $row1['sname'] ?> </span> 
 
                            
                                 <div class="topbar-social">
@@ -568,7 +664,31 @@ $total_comment = mysqli_num_rows($result3) ;
          
            
 
+  <script>
+// Get the modal
+var modal = document.getElementById("myModals");
+var nav = document.getElementById("nav");
 
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("captions");
+img.onclick = function(){
+  modal.style.display = "block";
+  nav.style.display = "none";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("closes")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+  nav.style.display = "block";
+}
+</script>
            <script>
 
 

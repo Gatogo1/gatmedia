@@ -26,6 +26,30 @@ body {
  
 }
 
+.single-post-wrap{
+    
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.com{
+
+    font-weight: bold;
+}
+.btn{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+   
+}
+a{
+  text-decoration:none;
+  color:black;
+}
+
+.fa-facebook{
+  background-color:blue;
+ padding: 2px;
+ width:20px;
+color:white;
+  border-radius: 50%;
+}
 
   </style>
   <title>User Profile</title>
@@ -41,11 +65,10 @@ include('comm/conn.php');
         if (isset($_SESSION["email"])) {
 	$image=$_SESSION["image"];
     $uid=$_SESSION['id'];
-    $uid=$_SESSION['id'];
-   
+
     $useridCODE=$uid*1540948579;      
 } else {
-  header("location:index.php");
+  header("location:login");
 $uid=0;
 }  
 
@@ -113,8 +136,8 @@ $page_view = mysqli_num_rows($result2) ;
  <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i>New York</p> </div> 
 </div>
  </div>
- <div class="bg-light p-4 d-flex mt-4 justify-content-end text-center">
-   <ul class="list-inline mt-3"> 
+ <div class="bg-light p-2 d-flex mt-2 justify-content-end text-center">
+   <ul class="list-inline mt-2"> 
     <li class="list-inline-item"> 
       <h5 class="font-weight-bold mb-0 d-block"><?php echo $total_post?></h5>
       <small class="text-muted"> <i class="fa fa-image mr-1"></i>Post</small> </li> <li class="list-inline-item"> 
@@ -129,10 +152,13 @@ $page_view = mysqli_num_rows($result2) ;
 <!---create post section --->
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-sm m-3" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+<a href="post" type="button" class="btn btn-primary btn-sm m-3" ><i class="fa fa-plus-square-o" aria-hidden="true"></i>
 Create new blog
-</button>
+</a>
 
+<button href="post" type="button" class="btn btn-primary btn-sm m-3" data-toggle="modal" data-target="#exampleModal" ><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+Profile details
+</button>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -146,57 +172,35 @@ Create new blog
       <div class="modal-body">
 
 <!----- create post ---->
-      <form action="formValidation/postValidation.php" method="post" name="sentMessage" enctype="multipart/form-data" id="contactForm">
-      <input type="hidden" class="form-control" id="title" value=" <?php echo date(" jS \ F Y")  ?>" name="date">
-      <input type="hidden" name="userID"  class="form-control" id="formGroupExampleInput2" value=" <?php echo $uid?>">
-  <div class="form-group">
-    <label for="formGroupExampleInput">Tittle</label>
-    <input type="text" class="form-control" name="tittle" id="formGroupExampleInput" placeholder=" Input blog tittle hear">
-  </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput2">Content</label>
-    <input type="text" name="content"  class="form-control" id="formGroupExampleInput2" placeholder=" Input blog content">
-  </div>
-
-  <div class="form-group ">
-      <label for="inputState">Category</label>
-      <select id="inputState" name="cat" class="form-control">
-        <option selected>Choose...</option>
-        <option value="education">Education</option>
-        <option value="news">News</option>
-        <option value="entertainment">Entertainment</option>
-        <option value="art">Art</option>
-        <option value="fun">Fun</option>
-        <option value="lifestyle">Lifestyle</option>
-        <option value="stories">Stories</option>
-      </select>
+<div class="span4">
+      <blockquote>
+        <p>Bruce Wayne</p>
+        <small><cite title="Source Title">Gotham, United Kingdom  <i class="fa fa-globe" aria-hidden="true"></i></cite></small>
+      </blockquote>
+      <p>
+      <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education:</a><br>
+      <a href="#"><i class="fa fa-briefcase" aria-hidden="true"></i> Work:</a><br>
+      <a href="#"><i class="fa fa-phone" aria-hidden="true"> </i>Contact:</a><br>
+      <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Email: masterwayne@batman.com</a>
+      <br>
+      <a href="#"><i class="fa fa-birthday-cake" aria-hidden="true"></i> Date of Birth: January 30, 1974</a>
+      <br>
+      <a href="#"><i class="fa fa-joomla" aria-hidden="true"></i> Joined: January 30, 1974</a>
+      <br>
+      <a href="#"><i class=" text-center fa fa-facebook" aria-hidden="true"></i> Connect</a>
+      
+      <br>
+        <i class="icon-globe"></i> www.bootsnipp.com <br>
+        <i class="icon-gift"></i> January 30, 1974
+      </p>
     </div>
-
-  <div class="form-group">
-    <label for="exampleFormControlFile1">Select file</label>
-    <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
-    <div class="invalid-feedback">File can be Image or video</div>
-  </div>
-  
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Paste media link if any </label>
-    <textarea class="form-control" name="link" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" name="submit" class="btn btn-primary">Submit post</button>
-      </div>
-
-      </form>
     </div>
   </div>
 </div>
+</div>
 <!----- end create post ---->
 
-<h5 class="mb-0">About</h5> <div class="p-4 rounded shadow-sm bg-light"> <p class="font-italic mb-0"></p> <p class="font-italic mb-0">Lives in New York</p> <p class="font-italic mb-0">Photographer</p> </div> </div> 
+<h5 class="mb-0">About<?php echo $uid ?></h5> <div class="p-4 rounded shadow-sm bg-light"> <p class="font-italic mb-0"></p> <p class="font-italic mb-0">Lives in New York</p> <p class="font-italic mb-0">Photographer</p> </div> </div> 
 
 
    <h5 class="mb-0">Recent post</h5>
@@ -219,32 +223,37 @@ Create new blog
 
                $one='1';
              
-               $sql="select * from blog where id2='$uid'  order by id desc LIMIT 50   ";
-          $result = mysqli_query($conn,$sql)or die( mysqli_error($conn));
+               $sql5="select * from blog where id2='$uid'  order by id desc LIMIT 50   ";
+          $result5 = mysqli_query($conn,$sql5)or die( mysqli_error($conn));
          
          
  
 
-          while ($row=mysqli_fetch_array($result)) {
+          while ($row5=mysqli_fetch_array($result5)) {
          
            
 
 
-
-           $data=$row['id'];
-           $date=$row['date'];
-           $tittle=$row['tittle'];
-           $image=$row['image'];
-           $content=$row['content'];
-           $category=$row['category'];
-           $byF=$row['fname'];
-           $byS=$row['sname'];
-           $img=$row['img'];
-           $dis=$row['dis'];
-         $slug=$row['slug'];;
+            $data=$row5['id'];
+            $creator=$row5['id2'];
+            $date=$row5['date'];
+            $tittle=$row5['tittle'];
+            $image=$row5['image'];
+            $content=$row5['content'];
+            $category=$row5['category'];
+            $img=$row5['img'];
+          $slug=$row5['slug'];;
+             $code=$data*1540948579;
+             $new=$row5['id'];
+             $imag = str_replace(' ', '', $img);
+ 
+ 
+ 
+             $sql1="select * from users where id='$creator' ";
+             $result1 = mysqli_query($conn,$sql1)or die( mysqli_error($conn));
+             $row1=mysqli_fetch_array($result1) ;
             $code=$data*1540948579;
-            $new=$row['id'];
-            $imag = str_replace(' ', '', $img);
+
            
   $links="blog_details.php?id=$slug";           $sql2 = "select * from pagehits where postID='$data' ";
            $result2 = mysqli_query($conn,$sql2)or die( mysqli_error($conn));
@@ -297,7 +306,7 @@ else {
                        
 
                             <ul>
-                                 <li><img src="adm/user_pic/<?php echo $imag?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $byF ?>  </span> 
+                                 <li><img src="adm/user_pic/<?php echo $row1['image']?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $row1['fname'] ?>  </span> 
 
                            
                                 <div class="topbar-social">
@@ -329,9 +338,9 @@ else {
                             <p class="title m-2"><a onclick="demoDisplay()"  href="<?=$links;?>" class="text-white"  ><?php echo $tittle?></a></p>
                         </div>
                         <div class="thumb">
-                            <a  onclick="demoDisplay()"  href="<?=$links;?>"  ><img style="display:<?php echo $imgs ?>;" src="adm/upload/<?php echo $image?>"  alt="img"></a>
+                            <a  onclick="demoDisplay()"  href="<?=$links;?>"  ><img style="display:<?php echo $imgs ?>;" src="formValidation/upload/<?php echo $image?>"  alt="img"></a>
                             <video style="display:<?php echo $vi ?>;"  width="100%"  controls controlsList="nodownload" loop   muted playsinline >
-                               <source src="adm/upload/<?php echo  $row['image'];?>" type="video/mp4">
+                               <source src="formValidation/upload/<?php echo  $image;?>" type="video/mp4">
 
                              </video>
                             <a href="<?=$links;?>" class="tag-base tag-blue"><?php echo $category?></a>
