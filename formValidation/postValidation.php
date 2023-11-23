@@ -65,7 +65,7 @@ $slug= create_slug($tittle);
 	if( in_array($imageFileType,$extensions_arr) ){
  
 	// Upload files and store in database
-	if(move_uploaded_file($_FILES["image"]["tmp_name"],'upload/'.$filename .$filename1)){
+	if(move_uploaded_file($_FILES["image"]["tmp_name"],'upload/'.$filename )){
 		// Image db insert sql
 		$sql = "INSERT INTO `blog`(  `id2`,`tittle`,`slug`, `category`, `content`, `image`,`video`,`date`) VALUES ('$id_user','$tittle','$slug','$cat','$content','$filename','$link','$date')";
 		if(mysqli_query($conn,$sql)){

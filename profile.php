@@ -1,5 +1,10 @@
 
-<?php session_start(); ?>
+<?php session_start();
+
+if(!isset($_SESSION['email']))
+{
+    header("location:login");
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,6 +56,94 @@ color:white;
   border-radius: 50%;
 }
 
+
+
+
+
+/* The Modal (background) */
+.modals {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100% !important; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-contents {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#captions {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-contents, #captions {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.closes {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.closes:hover,
+.closes:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-contents {
+    width: 100%;
+  }
+}
+
+.pro,.creat{
+  display:block;
+}
+
+
+
   </style>
   <title>User Profile</title>
 </head>
@@ -90,6 +183,8 @@ $uid=0;
          
          
            $image=$row['image'];
+           $email=$row['email'];
+           $date=$row['date'];
           
          
            $byF=$row['fname'];
@@ -128,16 +223,20 @@ $page_view = mysqli_num_rows($result2) ;
    <div class="col-md-8 mx-auto"> 
     <!-- Profile widget -->
      <div class="bg-white shadow rounded overflow-hidden">
-       <div class="px-4 pt-0 pb-4 cover">
+       <div class="px-4 pt-4 mt-4 pb-4 cover">
          <div class="media align-items-end profile-head">
-           <div class="profile mr-3"><img src="adm/user_pic/<?php echo $image?>"alt="..." width="130"   class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
+           <div class="profile mr-3"><img  id="myImg" src="formValidation/user_pic/<?php echo $image?>"alt="..." width="130"   class="rounded mb-2 img-thumbnail"><a href="formValidation/changeProfile.php" class="btn btn-outline-dark btn-sm btn-block">Change Profile</a>
           </div> 
+
+
+   
+
           <div class="media-body mb-5 text-white"> <h4 class="mt-0 mb-0 text-white"><?php echo $byF ?> <?php echo $byS ?></h4>
  <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i>New York</p> </div> 
 </div>
  </div>
- <div class="bg-light p-2 d-flex mt-2 justify-content-end text-center">
-   <ul class="list-inline mt-2"> 
+ <div class="bg-light p-4 d-flex mt-4 justify-content-end text-center">
+   <ul class="list-inline mt-4"> 
     <li class="list-inline-item"> 
       <h5 class="font-weight-bold mb-0 d-block"><?php echo $total_post?></h5>
       <small class="text-muted"> <i class="fa fa-image mr-1"></i>Post</small> </li> <li class="list-inline-item"> 
@@ -149,22 +248,19 @@ $page_view = mysqli_num_rows($result2) ;
 
 <small class="text-muted"> <i class="fa fa-eye mr-1"></i>Total post Views</small> </li> </ul> </div> <div class="px-4 py-3">
   
-<!---create post section --->
-
+<div id="myModals" class="modals">
+  <span class="closes">&times;</span>
+  <img class="modal-contents" id="img01">
+  <div id="captions"></div>
+</div>
 <!-- Button trigger modal -->
-<a href="post" type="button" class="btn btn-primary btn-sm m-3" ><i class="fa fa-plus-square-o" aria-hidden="true"></i>
-Create new blog
-</a>
 
-<button href="post" type="button" class="btn btn-primary btn-sm m-3" data-toggle="modal" data-target="#exampleModal" ><i class="fa fa-plus-square-o" aria-hidden="true"></i>
-Profile details
-</button>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -174,25 +270,44 @@ Profile details
 <!----- create post ---->
 <div class="span4">
       <blockquote>
-        <p>Bruce Wayne</p>
-        <small><cite title="Source Title">Gotham, United Kingdom  <i class="fa fa-globe" aria-hidden="true"></i></cite></small>
+        <p><?php echo $byF ?> <?php echo $byS ?>   <a  href="formValidation/editfname.php"  class="btn  btn-primary btn-sm m-3" ><i class="fa fa-edit" ></i>
+Edit
+</a></p>
+        <small><cite title="Source Title">Gotham, United Kingdom  <i class="fa fa-globe" aria-hidden="true"></i></cite>   <a  href="formValidation/editlocation.php"  class="btn  btn-primary btn-sm m-3" ><i class="fa fa-edit"></i>
+Edit
+</a></small>
       </blockquote>
       <p>
-      <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education:</a><br>
-      <a href="#"><i class="fa fa-briefcase" aria-hidden="true"></i> Work:</a><br>
-      <a href="#"><i class="fa fa-phone" aria-hidden="true"> </i>Contact:</a><br>
-      <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Email: masterwayne@batman.com</a>
+      <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education:</a>   <a  href="formValidation/editeducation.php"  class="btn  btn-primary btn-sm m-3" ><i class="fa fa-edit" ></i>
+Edit
+</a><br>
+      <a href="#"><i class="fa fa-briefcase" aria-hidden="true"></i> Work:</a>   <a  href="formValidation/editwork.php"  class="btn  btn-primary btn-sm m-3" ><i class="fa fa-edit" ></i>
+Edit
+</a><br>
+      <a href="#"><i class="fa fa-phone" aria-hidden="true"> </i>Contact:</a>  <a  href="formValidation/editcontact.php"  class="btn  btn-primary btn-sm m-3" ><i class="fa fa-edit" ></i>
+Edit
+</a><br>
+      <a href="formValidation/editemail.php"><i class="fa fa-envelope" aria-hidden="true"></i> Email: <?php echo $email?>  <a  href="formValidation/editemail.php"  class="btn  btn-primary btn-sm m-3" ><i class="fa fa-edit" ></i>
+Edit
+</a></a>
       <br>
-      <a href="#"><i class="fa fa-birthday-cake" aria-hidden="true"></i> Date of Birth: January 30, 1974</a>
+      <a href="formValidation/editbirth.php"><i class="fa fa-birthday-cake" aria-hidden="true"></i> Date of Birth: January 30, 1974</a>  <a  href="editProfile"  class="btn  btn-primary btn-sm m-3" ><i class="fa fa-edit" ></i>
+Edit
+</a>
       <br>
-      <a href="#"><i class="fa fa-joomla" aria-hidden="true"></i> Joined: January 30, 1974</a>
+      <a href="#"><i class="fa fa-joomla" aria-hidden="true"></i> Joined: <?php echo $date?></a>   <a  href="editProfile"  class="btn  btn-primary btn-sm m-3" ><i class="fafa-edit" ></i>
+Edit
+</a>
       <br>
       <a href="#"><i class=" text-center fa fa-facebook" aria-hidden="true"></i> Connect</a>
       
       <br>
-        <i class="icon-globe"></i> www.bootsnipp.com <br>
-        <i class="icon-gift"></i> January 30, 1974
-      </p>
+       
+Edit
+</a><br>
+       
+
+
     </div>
     </div>
   </div>
@@ -202,7 +317,16 @@ Profile details
 
 <h5 class="mb-0">About<?php echo $uid ?></h5> <div class="p-4 rounded shadow-sm bg-light"> <p class="font-italic mb-0"></p> <p class="font-italic mb-0">Lives in New York</p> <p class="font-italic mb-0">Photographer</p> </div> </div> 
 
+<!---create post section --->
+<div class="botn d-flex ">
+<a  href="post"  class="btn  btn-primary btn-sm m-3" ><i class="fa fa-plus-square-o" ></i>
+Create new blog
+</a>
 
+<button href="post" type="button" class="btn pro btn-primary btn-sm m-3" data-toggle="modal" data-target="#exampleModal" ><i class="fa fa-plus-square-o"></i>
+Profile details
+</button>
+</div>
    <h5 class="mb-0">Recent post</h5>
    <a href="#" class="btn btn-link text-muted">Show all</a> 
   
@@ -306,7 +430,7 @@ else {
                        
 
                             <ul>
-                                 <li><img src="adm/user_pic/<?php echo $row1['image']?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $row1['fname'] ?>  </span> 
+                                 <li><img  src="adm/user_pic/<?php echo $row1['image']?>" alt="" width="40" class="rounded-circle" /> </i><span style=" font-size:15px;"><?php echo $row1['fname'] ?>  </span> 
 
                            
                                 <div class="topbar-social">
@@ -429,7 +553,37 @@ else {
     <!---- comment----->
     <!-- Button trigger modal -->
  
+           
 
+    <script>
+// Get the modal
+var modal = document.getElementById("myModals");
+var nav = document.getElementById("nav");
+var creat = document.getElementById("creat");
+var pos = document.getElementById("pos");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("captions");
+img.onclick = function(){
+  modal.style.display = "block";
+  nav.style.display = "none";
+
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("closes")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+  nav.style.display = "block";
+
+}
+</script>
     <script type="text/javascript">
 
 setInterval(function() {

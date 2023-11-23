@@ -12,11 +12,12 @@ RewriteRule ^movies?$ movies.php
 RewriteRule ^lifestyle?$ lifestyle.php
 RewriteRule ^home?$ index.php
 RewriteRule ^admin?$ blogs/adm/manage_blogs.php
-RewriteRule ^profile?$ adm/user_blogs.php
+RewriteRule ^profile? profile.php
 RewriteRule ^login?$ adm/login.php
 RewriteRule ^logout?$ adm/logout.php
 RewriteRule ^register?$ form.php
 RewriteRule ^post?$ post.php
+RewriteRule ^editProfile?$ editPro.php
 
 
 

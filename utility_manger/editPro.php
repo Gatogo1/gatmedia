@@ -1,3 +1,25 @@
+
+<?php session_start();
+
+if(!isset($_SESSION['email']))
+{
+    header("location:login");
+
+}
+
+
+        if (isset($_SESSION["email"])) {
+	$image=$_SESSION["image"];
+    $uid=$_SESSION['id'];
+
+    $useridCODE=$uid*1540948579;      
+} else {
+  header("location:login");
+$uid=0;
+} 
+
+?>
+
 <?php include("common/head.php")?>
     <body>
     <?php 
