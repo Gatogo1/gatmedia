@@ -51,11 +51,11 @@
          </div>
 
          <div class="  menu col-sm-12">
-            <a   class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-file-sound-o" style="font-size:15px"></i>   Ads </a> 
+            <a   class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-file-sound-o" style="font-size:15px"></i> Portfolio </a> 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="navAds.php">Nav Ads</a>
-                <a class="dropdown-item" href="deAds.php">Department Ads </a>
-                <a class="dropdown-item" href="genAds.php">General Ads </a>
+                <a class="dropdown-item" href="port/about.php">About-me</a>
+                <a class="dropdown-item" href="port/expirience.php">Experience</a>
+                <a class="dropdown-item" href="port/projrct.php">Projects</a>
                
               </div>
          </div>
